@@ -2,7 +2,7 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
-var KomponentGenerator = module.exports = function KomponentGenerator(args, options, config) {
+var KomponentGenerator = module.exports = function KomponentGenerator() { // (args, options, config)
   yeoman.generators.Base.apply(this, arguments);
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
@@ -17,6 +17,14 @@ KomponentGenerator.prototype.askFor = function askFor() {
     name: 'constructorName',
     message: 'Constructor name?'
   }, {
+    type: 'confirm',
+    name: 'isAttributed',
+    message: 'Create attribution and metadata header?',
+    default: true
+  }, {
+    when: function (props) {
+      return props.isAttributed;
+    },
     type: 'input',
     name: 'author',
     message: 'Author?'
@@ -37,18 +45,20 @@ KomponentGenerator.prototype.askFor = function askFor() {
   }];
 
   this.prompt(prompts, function (props) {
+    this.isAttributed = props.isAttributed;
     this.constructorName = props.constructorName;
     this.author = props.author;
+    this.newLine = '\n';
 
     // Construct the desired tab type
     if (props.tabsOrSpaces === 'spaces') {
       this.tab = '';
 
-      for (i = 0, ii = parseInt(props.indendation, 10); i < ii; i += 1) {
-        this.tab += ' ';
+      for (var i = 0, ii = parseInt(props.indendation, 10); i < ii; i += 1) {
+        this.tab += '';
       }
     } else {
-      this.tab += ' '; // Tab character
+      this.tab = '\t'; // Tab character
     }
 
     cb();

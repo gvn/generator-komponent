@@ -2,7 +2,8 @@
   "globals": {
     "module": true,
     "define": true,
-    "require": true
+    "require": true,
+    "__dirname": true
   },
   "browser": true,
   "curly": true,

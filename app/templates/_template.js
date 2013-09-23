@@ -1,40 +1,41 @@
-/*
+<% if (isAttributed) { %>/*
 
 <%= tab %><%= constructorName %>
 <%= tab %>VERSION 0.0.1
 <%= tab %>AUTHOR <%= author %>
 
-*/
+*/<%= newLine %><% } %>
+define(['komponent'], function (Komponent) {
+<%= tab %>var <%= constructorName %> = function (options) {
+<%= tab %><%= tab %>var self = this,
+<%= tab %><%= tab %><%= tab %>defaults,
+<%= tab %><%= tab %><%= tab %>option;
 
-<%= constructorName %> = function (options) {
-<%= tab %>var self = this,
-<%= tab %><%= tab %>defaults,
-<%= tab %><%= tab %>option;
+<%= tab %><%= tab %>Komponent.mix(self);
 
-<%= tab %>self.callbacks = {};
+<%= tab %><%= tab %>// Options ----------------------------------------------------------------
 
-<%= tab %>// Options ----------------------------------------------------------------
+<%= tab %><%= tab %>defaults = {};
 
-<%= tab %>defaults = {};
+<%= tab %><%= tab %>for (option in options) {
+<%= tab %><%= tab %><%= tab %>defaults[option] = options[option] || defaults[option];
+<%= tab %><%= tab %>}
 
-<%= tab %>for (option in options) {
-<%= tab %><%= tab %>defaults[option] = options[option] || defaults[option];
-<%= tab %>}
+<%= tab %><%= tab %>self.options = defaults;
 
-<%= tab %>self.options = defaults;
+<%= tab %><%= tab %>// Element references -----------------------------------------------------
 
-<%= tab %>// Element references -----------------------------------------------------
+<%= tab %><%= tab %>// Properties -------------------------------------------------------------
 
+<%= tab %><%= tab %>// Setup ------------------------------------------------------------------
 
-<%= tab %>// Properties -------------------------------------------------------------
+<%= tab %><%= tab %>// Event Delegation -------------------------------------------------------
 
+<%= tab %>};
 
-<%= tab %>// Setup ------------------------------------------------------------------
+<%= tab %><%= constructorName %>.prototype = {
 
+<%= tab %>};
 
-<%= tab %>// Event Delegation -------------------------------------------------------
-
-
-};
-
-<%= constructorName %>.prototype = new Komponent();
+<%= tab %>return <%= constructorName %> ;
+});
