@@ -55,7 +55,7 @@ KomponentGenerator.prototype.askFor = function askFor() {
       this.tab = '';
 
       for (var i = 0, ii = parseInt(props.indendation, 10); i < ii; i += 1) {
-        this.tab += '';
+        this.tab += ' ';
       }
     } else {
       this.tab = '\t'; // Tab character
